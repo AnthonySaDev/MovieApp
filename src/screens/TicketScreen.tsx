@@ -12,3 +12,5 @@ const TicketScreen = () => {
 }
 
 const styles = StyleSheet.create({})
+
+export default TicketScreen

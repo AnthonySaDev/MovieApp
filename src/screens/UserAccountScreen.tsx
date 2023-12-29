@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, StyleSheet, View } from 'react-native'
 
-const userAccountScreen = () => {
+const UserAccountScreen  = () => {
   
     return (
       <View>
@@ -12,3 +12,5 @@ const userAccountScreen = () => {
 }
 
 const styles = StyleSheet.create({})
+
+export default UserAccountScreen 

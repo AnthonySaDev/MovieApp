@@ -12,3 +12,5 @@ const MovieDetailsScreen = () => {
 }
 
 const styles = StyleSheet.create({})
+
+export default MovieDetailsScreen;

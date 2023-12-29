@@ -12,3 +12,5 @@ const SeatBookingScreen = () => {
 }
 
 const styles = StyleSheet.create({})
+
+export default SeatBookingScreen
