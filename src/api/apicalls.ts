@@ -2,7 +2,7 @@ const apiKey: string = '4450a7e8d82dde4c8a1955527d487785';
 export const baseImagePath = (size: string, path: string) => {
     return `https://image.tmdb.org/t/p/${size}${path}`
 }
-export const nowPlayingMovies: string = `https://api.themoviedb.org/3/movie/&now_playing?api_key=${apiKey}&language=pt-BR`;
+export const nowPlayingMovies: string = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=pt-BR`;
 export const upComingMovies: string = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=pt-BR`;
 export const popularMovies: string = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR`;
 export const searchMovies = (keyword: string) => {
