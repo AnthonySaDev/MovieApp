@@ -28,7 +28,7 @@ const SubMovieCard = (props: any) => {
           style={[styles.cardImage, { width: props.cardWidth }]}
           source={{ uri: props.imagePath }}
         />
-        <Text numberOfLines={2} style={styles.textTitle}>
+        <Text numberOfLines={1} style={styles.textTitle}>
           {props.title}
         </Text>
       </View>

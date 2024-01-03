@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
-  Text,
   StyleSheet,
   View,
-  TouchableOpacity,
   Dimensions,
   ActivityIndicator,
   StatusBar,
@@ -16,7 +14,6 @@ import {
   nowPlayingMovies,
   popularMovies,
   baseImagePath,
-  searchMovies,
 } from '../api/apicalls';
 import InputHeader from '../components/InputHeader';
 import CategoryHeader from '../components/CategoryHeader';
