@@ -103,6 +103,7 @@ const HomeScreen = ({navigation}: any) => {
         data={nowPlayingMoviesList}
         keyExtractor={item => item.id}
         horizontal
+        showsVerticalScrollIndicator={false}
         bounces={false}
         decelerationRate={0}
         showsHorizontalScrollIndicator={false}
@@ -120,7 +121,7 @@ const HomeScreen = ({navigation}: any) => {
             <MovieCard
               shoudlMarginatedAtEnd={true}
               cardFunction={() => {
-                navigation.push('MovieDetails', {movieid: item.id});
+                navigation.push('MovieDetails', {movieId: item.id});
               }}
               cardWidth={width * 0.7}
               isFirst={index === 0}
@@ -140,13 +141,14 @@ const HomeScreen = ({navigation}: any) => {
         keyExtractor={item => item.id}
         horizontal
         bounces={false}
+        showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{gap: SPACING.space_36}}
         renderItem={({item, index}) => (
           <SubMovieCard
             shoudlMarginatedAtEnd={true}
             cardFunction={() => {
-              navigation.push('MovieDetails', {movieid: item.id});
+              navigation.push('MovieDetails', {movieId: item.id});
             }}
             cardWidth={width / 3}
             isFirst={index === 0}
@@ -161,6 +163,7 @@ const HomeScreen = ({navigation}: any) => {
         data={upComingMoviesList}
         keyExtractor={item => item.id}
         horizontal
+        showsVerticalScrollIndicator={false}
         bounces={false}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{gap: SPACING.space_36}}
@@ -168,7 +171,7 @@ const HomeScreen = ({navigation}: any) => {
           <SubMovieCard
             shoudlMarginatedAtEnd={true}
             cardFunction={() => {
-              navigation.push('MovieDetails', {movieid: item.id});
+              navigation.push('MovieDetails', {movieId: item.id});
             }}
             cardWidth={width / 3}
             isFirst={index === 0}

@@ -8,36 +8,7 @@ import {
   SPACING,
 } from '../theme/theme';
 import CustomIcon from './CustomIcon';
-
-const genres: any = {
-  28: 'Ação',
-  12: 'Aventura',
-  16: 'Animação',
-  35: 'Comédia',
-  80: 'Crime',
-  99: 'Documentário',
-  18: 'Drama',
-  10751: 'Família',
-  14: 'Fantasia',
-  36: 'História',
-  27: 'Terror',
-  10402: 'Música',
-  9648: 'Misterio',
-  10749: 'Romance',
-  878: 'Ficcão Cientifica',
-  10770: 'Cinema TV',
-  53: 'Thriller',
-  10752: 'Guerra',
-  37: 'Faroeste',
-  10759: 'Ação',
-  10762: 'Cultura',
-  10763: 'Gastronomia',
-  10764: 'Beleza',
-  10765: 'Viagem',
-  10766: 'Cinema',
-  10767: 'Jogos',
-  10768: 'Esportes',
-};
+import { genres } from '../api/genres';
 
 const MovieCard = (props: any) => {
   return (

@@ -33,6 +33,7 @@ const SearchScreen = ({navigation}: any) => {
         data={searchList}
         keyExtractor={item => item.id}
         numColumns={2}
+        showsVerticalScrollIndicator={false}
         bounces={false}
         ListHeaderComponent={
           <View style={styles.InputHeaderContainer}>
@@ -46,7 +47,7 @@ const SearchScreen = ({navigation}: any) => {
             shoudlMarginatedAtEnd={false}
             shouldMarginatedAround={true}
             cardFunction={() => {
-              navigation.push('MovieDetails', {movieid: item.id});
+              navigation.push('MovieDetails', {movieId: item.id});
             }}
             cardWidth={width / 2 - SPACING.space_12 * 2}
             title={item.title}
