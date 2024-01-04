@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     aspectRatio: 19 / 20,
+    resizeMode: 'cover',
 
   },
   title: {
