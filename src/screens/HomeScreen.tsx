@@ -40,6 +40,8 @@ const HomeScreen = ({navigation}: any) => {
   const [upComingMoviesList, setUpComingMoviesList] = useState<any>(undefined);
   const [popularMoviesList, setPopularMoviesList] = useState(undefined);
 
+  const isNowPlaying = true;
+
   useEffect(() => {
     getMovies(nowPlayingMovies).then(data => {
       setNowPlayingMoviesList([
@@ -56,10 +58,6 @@ const HomeScreen = ({navigation}: any) => {
     });
   }, []);
 
-  const searchMoviesFunction = () => {
-    navigation.navigate('Search');
-  };
-
   if (
     nowPlayingMoviesList == undefined &&
     nowPlayingMoviesList == null &&
@@ -75,10 +73,6 @@ const HomeScreen = ({navigation}: any) => {
         contentContainerStyle={styles.scrollViewContainer}>
         <StatusBar hidden />
 
-        <View style={styles.InputHeaderContainer}>
-          <InputHeader searchFunction={searchMoviesFunction} />
-        </View>
-
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={COLORS.Orange} />
         </View>
@@ -93,10 +87,6 @@ const HomeScreen = ({navigation}: any) => {
       contentContainerStyle={styles.scrollViewContainer}
       showsVerticalScrollIndicator={false}>
       <StatusBar hidden />
-
-      <View style={styles.InputHeaderContainer}>
-        <InputHeader searchFunction={searchMoviesFunction} />
-      </View>
 
       <CategoryHeader title="Em Cartaz" />
       <FlatList
@@ -121,7 +111,7 @@ const HomeScreen = ({navigation}: any) => {
             <MovieCard
               shoudlMarginatedAtEnd={true}
               cardFunction={() => {
-                navigation.push('MovieDetails', {movieId: item.id});
+                navigation.push('MovieDetails', {movieId: item.id, isNowPlaying: isNowPlaying});
               }}
               cardWidth={width * 0.7}
               isFirst={index === 0}

@@ -11,7 +11,12 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import {baseImagePath, movieCastDetails, movieDetails} from '../api/apicalls';
+import {
+  baseImagePath,
+  movieCastDetails,
+  movieDetails,
+  watchProviders,
+} from '../api/apicalls';
 import {
   BORDERRADIUS,
   COLORS,
@@ -24,6 +29,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import CustomIcon from '../components/CustomIcon';
 import CategoryHeader from '../components/CategoryHeader';
 import CastCard from '../components/CastCard';
+import ProviderCard from '../components/ProviderCard';
 
 const getMovieDetails = async (movieId: number) => {
   try {
@@ -45,9 +51,20 @@ const getMovieCastDetails = async (movieId: number) => {
   }
 };
 
+const getMovieWatchProviders = async (movieId: number) => {
+  try {
+    let response = await fetch(watchProviders(movieId));
+    let json = await response.json();
+    return json;
+  } catch (error) {
+    console.log('Algo deu errado no getMovieWatchProviders: ' + error);
+  }
+};
+
 const MovieDetailsScreen = ({navigation, route}: any) => {
   const [movieData, setMovieData] = useState<any>(undefined);
   const [movieCastData, setMovieCastData] = useState<any>(undefined);
+  const [watchProviders, setWatchProviders] = useState<any>(undefined);
 
   useEffect(() => {
     (async () => {
@@ -58,6 +75,13 @@ const MovieDetailsScreen = ({navigation, route}: any) => {
     (async () => {
       const tempMovieCastData = await getMovieCastDetails(route.params.movieId);
       setMovieCastData(tempMovieCastData.cast);
+    })();
+
+    (async () => {
+      const tempMovieWatchProviders = await getMovieWatchProviders(
+        route.params.movieId,
+      );
+      setWatchProviders(tempMovieWatchProviders.results.BR.flatrate);
     })();
   }, []);
 
@@ -172,19 +196,50 @@ const MovieDetailsScreen = ({navigation, route}: any) => {
             />
           )}
         />
-        <View>
-          <TouchableOpacity
-            style={styles.buttonBG}
-            onPress={() => {
-              navigation.push('SeatBooking', {
-                bgImage: baseImagePath('w780', movieData?.backdrop_path),
-                PosterImage: baseImagePath('original', movieData?.poster_path),
-                movieId: movieData?.id,
-              });
-            }}>
-            <Text style={styles.buttonText}>Escolher lugares</Text>
-          </TouchableOpacity>
-        </View>
+        <CategoryHeader title="Disponível em:" />
+
+        {watchProviders != null || watchProviders != undefined ? (
+          <View style={styles.providerContainer}>
+            <FlatList
+              data={watchProviders}
+              keyExtractor={(item: any) => item.id}
+              horizontal
+              contentContainerStyle={styles.castList}
+              renderItem={({item, index}: any) => (
+                <ProviderCard
+                  shoudlMarginatedAtEnd={true}
+                  cardWidth={100}
+                  isFirst={index == 0 ? true : false}
+                  isLast={index == watchProviders?.length - 1 ? true : false}
+                  imagePath={baseImagePath('w185', item.logo_path)}
+                  title={item.provider_name}
+                />
+              )}
+            />
+          </View>
+        ) : (
+          <View style={styles.providerContainer}>
+            <Text style={styles.textTitle}>Não há provedores no Brasil</Text>
+          </View>
+        )}
+        {route.params.isNowPlaying && (
+          <View>
+            <TouchableOpacity
+              style={styles.buttonBG}
+              onPress={() => {
+                navigation.push('SeatBooking', {
+                  bgImage: baseImagePath('w780', movieData?.backdrop_path),
+                  PosterImage: baseImagePath(
+                    'original',
+                    movieData?.poster_path,
+                  ),
+                  movieId: movieData?.id,
+                });
+              }}>
+              <Text style={styles.buttonText}>Escolher lugares</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </ScrollView>
   );
@@ -298,17 +353,20 @@ const styles = StyleSheet.create({
   buttonBG: {
     alignItems: 'center',
     marginVertical: SPACING.space_24,
-
   },
   buttonText: {
-    borderRadius:BORDERRADIUS.radius_25*2,
-    paddingHorizontal:SPACING.space_24,
-    paddingVertical:SPACING.space_10,
-    backgroundColor:COLORS.Orange,
+    borderRadius: BORDERRADIUS.radius_25 * 2,
+    paddingHorizontal: SPACING.space_24,
+    paddingVertical: SPACING.space_10,
+    backgroundColor: COLORS.Orange,
     fontFamily: FONTFAMILY.poppins_medium,
-    fontSize:FONTSIZE.size_14,
-    color:COLORS.White
-  }
+    fontSize: FONTSIZE.size_14,
+    color: COLORS.White,
+  },
+  providerContainer: {
+    marginVertical: SPACING.space_12,
+    alignItems: 'center',
+  },
 });
 
 export default MovieDetailsScreen;

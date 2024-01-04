@@ -15,3 +15,11 @@ export const movieDetails = (id: number) => {
 export const movieCastDetails = (id: number) => {
   return `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}&language=pt-BR`;
 };
+
+export const watchProviders  = (id: number) => {
+  return `https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=${apiKey}&language=pt-BR`
+}
+
+export const filterByGenre = (genreId: number, page: number) => {
+  return `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genreId}&page=${page}&language=pt-BR`
+}

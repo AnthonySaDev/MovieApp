@@ -15,16 +15,14 @@ import {
 } from '../theme/theme';
 import CustomIcon from './CustomIcon';
 
-interface InputHeaderProps {
-  title: string;
-}
+
 export default function InputHeader(props: any) {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState(props.searchText);
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.textInput}
-        value={searchText}
+        value={props.searchText}
         onChangeText={text => setSearchText(text)}
         placeholder="Pesquise seus filmes..."
         placeholderTextColor={COLORS.WhiteRGBA32}
